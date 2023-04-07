@@ -1,0 +1,12 @@
+Temp,Cold,Cool,Pleasent,Warm,Hot
+0,Y*,N,N,N,N
+5,Y,Y,N,N,N
+10,N,Y,N,N,N
+12.5,N,Y*,N,N,N
+15,N,Y,N,N,N
+17.5,N,N,Y*,N,N
+20,N,N,N,Y,N
+22.5,N,N,N,Y*,N
+25,N,N,N,Y,N
+27.5,N,N,N,N,Y
+30,N,N,N,N,Y*

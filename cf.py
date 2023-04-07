@@ -1,5 +1,4 @@
 import re
-import sys
 import argparse
 from functools import reduce
 from dataclasses import dataclass, field
