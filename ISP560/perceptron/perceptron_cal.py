@@ -58,11 +58,12 @@ def full_solve(ixs, ws, yds, alpha, theta, epoch=5, fn=None):
         ws = r["ws"]
 
 
-# Initialize variables here
-ixs = [[0, 0], [0, 1], [1, 0], [1, 1]]
-ws = [0.3, -0.1]
-yd = [0, 0, 0, 1]
-alpha = 0.1
-theta = 0.2
+if __name__ == "__main__":
+    # Initialize variables here
+    ixs = [[0, 0], [0, 1], [1, 0], [1, 1]]
+    ws = [0.3, -0.1]
+    yd = [0, 0, 0, 1]
+    alpha = 0.1
+    theta = 0.2
 
-full_solve(ixs, ws, yd, alpha, theta, epoch=5, fn=act_fn.step)
+    full_solve(ixs, ws, yd, alpha, theta, epoch=5, fn=act_fn.step)
