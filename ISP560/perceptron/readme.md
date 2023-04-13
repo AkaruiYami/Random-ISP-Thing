@@ -1,4 +1,23 @@
 Calculate perceptron using python. This can calculate multiple number of variables.
+I was thought by 2 lecturers and both of them has different methods. So, this is method 1.
+
+p.s. I'm still confuse. lol
+
+# How To Run
+
+## In Code Edit
+
+1. Go to `perceptron_cal.py`.
+2. Navigate to the bottom of the code until you find `__name__ == "__main__"` part.
+3. Change the variable value.
+4. Open cmd / terminal.
+5. Run `python perceptron_cal.py`.
+
+## Using Console Input
+
+1. Open cmd / terminal.
+2. Run `python main.py`.
+3. Enter the value.
 
 # Case Example
 
