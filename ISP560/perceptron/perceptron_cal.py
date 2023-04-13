@@ -42,20 +42,32 @@ def cal_epoch(ixs, ws, yds, alpha, theta, fn=None):
     er1_msg = "Number of weight must be the same as the number of input"
     assert len(ixs[0]) == len(ws), er1_msg
 
+    correct = 0
     for i, xs in enumerate(ixs):
         r = solve_row(xs, ws, yds[i], alpha, theta, fn)
         new_ws = r["ws"]
         print_output(xs, yds[i], ws, r["ya"], r["e"], r["delta_ws"], new_ws)
         ws = new_ws
-        # print(r)
-    return r
+        if r["e"] == 0:
+            correct += 1
+
+    return r, correct
 
 
-def full_solve(ixs, ws, yds, alpha, theta, epoch=5, fn=None):
-    for i in range(1, epoch + 1):
-        print(f"Epoch {i}".center(15, "="))
-        r = cal_epoch(ixs, ws, yds, alpha, theta, fn)
+def full_solve(ixs, ws, yds, alpha, theta, epoch=None, fn=None):
+    if epoch is None:
+        epoch = -1
+
+    i = 0
+    while i < epoch or epoch == -1:
+        print(f"Epoch {i+1}".center(15, "="))
+        r, correct = cal_epoch(ixs, ws, yds, alpha, theta, fn)
+
+        if correct == len(ixs):
+            break
+
         ws = r["ws"]
+        i += 1
 
 
 if __name__ == "__main__":
@@ -65,5 +77,6 @@ if __name__ == "__main__":
     yd = [0, 0, 0, 1]
     alpha = 0.1
     theta = 0.2
+    epoch = None
 
-    full_solve(ixs, ws, yd, alpha, theta, epoch=5, fn=act_fn.step)
+    full_solve(ixs, ws, yd, alpha, theta, epoch=epoch, fn=act_fn.step)

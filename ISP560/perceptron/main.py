@@ -11,9 +11,10 @@ def get_activation_function():
     print("Choose activation function [default=1] : ")
     for i, name in enumerate(sign_func, 1):
         print(f"[{i}] {name}")
-    respond = int(input("Activation Function: ")) or 1
+    respond = int(input("Activation Function: ") or 0)
 
-    return getattr(act_func, sign_func[respond])
+    return getattr(act_func, sign_func[respond - 1])
+
 
 def prepare_xs(ixs):
     return list(zip(*ixs))
@@ -36,8 +37,8 @@ def main():
     yds = list(map(int, input("Desired Output [List of int] : ").split(",")))
     alpha = float(input("Alpha [float] : "))
     theta = float(input("Theta [float] : "))
-    epoch = int(input("Epoch [int] : "))
-
+    epoch = int(input("Epoch [int] : ") or -1)
+    print(epoch)
     fn = get_activation_function()
 
     perceptron_cal.full_solve(prepare_xs(ixs), ws, yds, alpha, theta, epoch, fn)

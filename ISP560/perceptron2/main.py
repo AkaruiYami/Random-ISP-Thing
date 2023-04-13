@@ -1,5 +1,3 @@
-from inspect import isfunction
-
 import perceptron_cal
 
 
