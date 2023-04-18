@@ -1,4 +1,5 @@
 import os
+import sys
 import matplotlib.pyplot as plt
 
 
@@ -81,8 +82,11 @@ class LinerEQSolver:
                 print(f"{self.cal_liner_eq(point0, point1)}; {range_msg}")
 
 
-file = os.path.join(os.path.dirname(__file__), "data/test.csv")
-solver = LinerEQSolver()
-solver.read_csv(file)
-solver.print_eq()
-solver.show()
+if __name__ == "__main__":
+    args = sys.argv[1:]
+    assert len(args) == 1, "Need to specify single file containing input"
+    file = os.path.join(args[0])
+    solver = LinerEQSolver()
+    solver.read_csv(file)
+    solver.print_eq()
+    solver.show()
