@@ -164,13 +164,13 @@ def solve_once(inputs, i_layers, b1, j_layers, b2, targets, alpha):
 
 
 def main():
-    alpha = 0.5
-    inputs = [0.05, 0.1]
-    i_layers = [[0.15, 0.20], [0.25, 0.30]]
-    b1 = [0.35, 0.35]
-    j_layers = [[0.4, 0.45], [0.5, 0.55]]
-    b2 = [0.6, 0.6]
-    targets = [0.01, 0.99]
+    alpha = 0.1
+    inputs = [1, 0]
+    i_layers = [[0.1, 0.3], [-0.2, 0.2]]
+    b1 = [0.1, -0.2]
+    j_layers = [[0.1, 0.2], [-0.3, 0.1]]
+    b2 = [-0.2, -0.1]
+    targets = [0, 1]
 
     solve_once(inputs, i_layers, b1, j_layers, b2, targets, alpha)
 
