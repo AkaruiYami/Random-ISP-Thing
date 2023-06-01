@@ -7,17 +7,17 @@ def get_delta_w(x, e, a):
     return x * e * a
 
 
-def get_output(xs, ws, theta, fn=None):
+def get_output(xs, ws, theta, bias, fn=None):
     if fn is None:
         fn = lambda r: 0 if r < 0 else 1
     t = 0
     for x, w in zip(xs, ws):
         t += x * w
-    return fn(t - theta)
+    return fn(t + theta * bias)
 
 
-def solve_row(xs, ws, yd, alpha, theta, fn=None):
-    ya = get_output(xs, ws, theta, fn)
+def solve_row(xs, ws, yd, alpha, theta, bias, fn=None):
+    ya = get_output(xs, ws, theta, bias, fn)
     e = yd - ya
     delta_ws = [get_delta_w(x, e, alpha) for x in xs]
     new_ws = [Decimal(str(w)) + Decimal(str(dw)) for w, dw in zip(ws, delta_ws)]
@@ -38,13 +38,13 @@ def print_output(xs, yd, ws, ya, e, delta_ws, new_ws):
     print(out)
 
 
-def cal_epoch(ixs, ws, yds, alpha, theta, fn=None):
+def cal_epoch(ixs, ws, yds, alpha, theta, bias, fn=None):
     er1_msg = "Number of weight must be the same as the number of input"
     assert len(ixs[0]) == len(ws), er1_msg
 
     correct = 0
     for i, xs in enumerate(ixs):
-        r = solve_row(xs, ws, yds[i], alpha, theta, fn)
+        r = solve_row(xs, ws, yds[i], alpha, theta, bias, fn)
         new_ws = r["ws"]
         print_output(xs, yds[i], ws, r["ya"], r["e"], r["delta_ws"], new_ws)
         ws = new_ws
@@ -54,14 +54,14 @@ def cal_epoch(ixs, ws, yds, alpha, theta, fn=None):
     return r, correct
 
 
-def full_solve(ixs, ws, yds, alpha, theta, epoch=None, fn=None):
+def full_solve(ixs, ws, yds, alpha, theta, bias, epoch=None, fn=None):
     if epoch is None:
         epoch = -1
 
     i = 0
     while i < epoch or epoch == -1:
         print(f"Epoch {i+1}".center(15, "="))
-        r, correct = cal_epoch(ixs, ws, yds, alpha, theta, fn)
+        r, correct = cal_epoch(ixs, ws, yds, alpha, theta, bias, fn)
 
         if correct == len(ixs):
             break
@@ -77,6 +77,7 @@ if __name__ == "__main__":
     yd = [0, 0, 0, 1]
     alpha = 0.1
     theta = 0.2
+    bias = -1
     epoch = None
 
-    full_solve(ixs, ws, yd, alpha, theta, epoch=epoch, fn=act_fn.step)
+    full_solve(ixs, ws, yd, alpha, theta, bias=bias, epoch=epoch, fn=act_fn.step)

@@ -38,10 +38,10 @@ def main():
     alpha = float(input("Alpha [float] : "))
     theta = float(input("Theta [float] : "))
     epoch = int(input("Epoch [int] : ") or -1)
-    print(epoch)
+    bias = int(input("Bias [1 or -1]: "))
     fn = get_activation_function()
 
-    perceptron_cal.full_solve(prepare_xs(ixs), ws, yds, alpha, theta, epoch, fn)
+    perceptron_cal.full_solve(prepare_xs(ixs), ws, yds, alpha, theta, bias, epoch, fn)
 
 
 if __name__ == "__main__":
